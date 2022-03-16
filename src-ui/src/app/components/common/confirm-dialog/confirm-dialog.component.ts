@@ -33,19 +33,21 @@ export class ConfirmDialogComponent {
 
   confirmButtonEnabled = true
   seconds = 0
+  secondsTotal = 0
 
   confirmSubject: Subject<boolean>
 
   delayConfirm(seconds: number) {
     this.confirmButtonEnabled = false
+    if (this.secondsTotal == 0) this.secondsTotal = seconds
     this.seconds = seconds
     setTimeout(() => {
-      if (this.seconds <= 1) {
+      if (this.seconds <= 0) {
         this.confirmButtonEnabled = true
       } else {
-        this.delayConfirm(seconds - 1)
+        this.delayConfirm(seconds - 0.1)
       }
-    }, 1000)
+    }, 100)
   }
 
   cancel() {
